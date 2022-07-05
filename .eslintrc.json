@@ -1,82 +1,62 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-        "plugin:react/recommended",
-        "standard"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["plugin:react/recommended", "standard"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react-native"],
+  "rules": {
+    "require-jsdoc": "warn",
+    "no-undef": "error",
+    "no-console": "error",
+    "no-multi-spaces": "error",
+    "@typescript-eslint/typedef": [
+      "error",
+      {
+        "arrowParameter": true,
+        "variableDeclaration": true
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "react-native"
+
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
     ],
-    "rules": {
-        "require-jsdoc":"warn",
-        "no-undef":"error",
-        "no-console":"error",
-        "no-multi-spaces": "warn",
-        /* https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/typedef.md */ 
-        "@typescript-eslint/typedef": [
-            "error",
-            {
-              "arrowParameter": true,
-              "variableDeclaration": true
-            }
-          ],
-        "semi": [2, "never"],
-        "avoidEscape": true,
-        "allowTemplateLiterals": true,
-        "no-explicit-any": true,
-        "react/prop-types": ["error"],
-        "max-len": ["error", { "code": 80 }],
-        "react-native/no-unused-styles": 2,
-        "react-native/split-platform-components": 2,
-        "react-native/no-inline-styles": 2,
-        "react-native/no-color-literals": 2,
-        "react-native/no-raw-text": 2,
-        "padding-line-between-statements": [
-            "error",
-            { "blankLine": "always", "prev": ["*", "import", "case"], "next": ["return", "import", "case"] }
-          ],
-        "object-curly-spacing": [
-            "error",
-            "always"
-        ],
-        "react/no-unused-prop-types": [
-            2
-        ],
-        "react/jsx-fragments": [
-            "error",
-            "element"
-        ],
-        "react/destructuring-assignment": [
-            2,
-            "always"
-        ],
-        "no-var": "warn",
-        "space-before-function-paren": [
-            "error",
-            "never"
-        ],
-        "react/jsx-uses-react": "error",
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-uses-vars": "error"
-    }
-    /*
-    "@typescript-eslint/quotes": [
-        "error",
-        "single",
-        {
-          "avoidEscape": true,
-          "allowTemplateLiterals": true
-        }
-      ]
-    */
+    "semi": [2, "never"],
+    "avoidEscape": true,
+    "allowTemplateLiterals": true,
+    "no-explicit-any": true,
+    "react/prop-types": ["error"],
+    "max-len": ["error", { "code": 80 }],
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
+    "react-native/no-raw-text": 2,
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "never",
+        "prev": ["*", "import", "case"],
+        "next": ["return", "import", "case"]
+      }
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "react/no-unused-prop-types": [2],
+    "react/jsx-fragments": ["error", "element"],
+    "react/destructuring-assignment": [2, "always"],
+    "no-var": "warn",
+    "space-before-function-paren": ["error", "never"],
+    "react/jsx-uses-react": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-vars": "error"
+  }
 }
