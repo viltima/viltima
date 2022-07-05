@@ -1,21 +1,20 @@
-/* eslint-disable camelcase */
 import {
   NavigationContainer,
   DefaultTheme,
-  Theme
-} from '@react-navigation/native';
+  Theme,
+} from "@react-navigation/native";
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors, Inter, LOGIN } from 'common';
+import { Colors, Inter, LOGIN } from "common";
 
-import useAppState from 'hooks/useAppState';
+import useAppState from "hooks/useAppState";
 
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from "expo-splash-screen";
 
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
 
-import * as Font from 'expo-font';
+import * as Font from "expo-font";
 
 import {
   Inter_100Thin,
@@ -26,16 +25,16 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
   Inter_800ExtraBold,
-  Inter_900Black
-} from '@expo-google-fonts/inter';
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
 
-import { ForgotPassword, Home, Login, Signup, VerifyAccount } from 'ui';
+import { ForgotPassword, Home, Login, Signup, VerifyAccount } from "ui";
 
-import React from 'react';
+import React from "react";
 
-import { View } from 'react-native';
+import { View } from "react-native";
 
-import { StackParamList } from 'types';
+import { StackParamList } from "types";
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -45,17 +44,17 @@ const Onboarding = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: '',
+        headerTitle: "",
         headerShadowVisible: false,
         headerStyle: {
-          backgroundColor: theme?.StartColor
-        }
+          backgroundColor: theme?.StartColor,
+        },
       }}
     >
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
-      <Stack.Screen name='Signup' component={Signup} />
-      <Stack.Screen name='VerifyAccount' component={VerifyAccount} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
     </Stack.Navigator>
   );
 };
@@ -68,13 +67,13 @@ const HomeStack = () => {
       screenOptions={{
         headerTintColor: theme?.TextColor,
         headerShadowVisible: false,
-        headerTitle: '',
+        headerTitle: "",
         headerTitleStyle: {
-          fontFamily: Inter.Regular
+          fontFamily: Inter.Regular,
         },
         headerStyle: {
-          backgroundColor: theme?.MiddleColor
-        }
+          backgroundColor: theme?.MiddleColor,
+        },
       }}
     >
       <Stack.Screen
@@ -82,13 +81,13 @@ const HomeStack = () => {
           headerRight: ({ tintColor }) => (
             <MaterialIcons
               onPress={() => signOut()}
-              name='logout'
+              name="logout"
               size={24}
               color={tintColor}
             />
-          )
+          ),
         }}
-        name='Home'
+        name="Home"
         component={Home}
       />
     </Stack.Navigator>
@@ -102,8 +101,8 @@ export const AppNavigator = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: theme?.StartColor || Colors.Black
-    }
+      background: theme?.StartColor || Colors.Black,
+    },
   };
 
   const [appIsReady, setAppIsReady] = React.useState(false);
@@ -123,10 +122,12 @@ export const AppNavigator = () => {
           Inter_600SemiBold,
           Inter_700Bold,
           Inter_800ExtraBold,
-          Inter_900Black
+          Inter_900Black,
         });
 
-        checkStorage('auth', LOGIN).catch(() => {});
+        checkStorage("auth", LOGIN).catch(() => {
+          /*  */
+        });
       } catch (e) {
       } finally {
         // Tell the application to render
@@ -138,7 +139,7 @@ export const AppNavigator = () => {
   }, []);
 
   React.useEffect(() => {
-    const hideSplash = async() => {
+    const hideSplash = async () => {
       if (appIsReady) {
         await SplashScreen.hideAsync();
       }

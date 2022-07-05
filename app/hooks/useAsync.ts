@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
 /**
  * @enum {string}
  */
 export const AsyncStatus = {
-  Loading: 'loading',
-  Idle: 'idle',
-  Success: 'success',
-  Error: 'error'
+  Loading: "loading",
+  Idle: "idle",
+  Success: "success",
+  Error: "error",
 };
 
 export const useAsync = (asyncFunction: Function, immediate = false) => {
-  const [status, setStatus] = React.useState<string>('idle');
+  const [status, setStatus] = React.useState<string>("idle");
   const [value, setValue] = React.useState<any | null>(null);
   const [error, setError] = React.useState<any | null>(null);
   const mounted = React.useRef(false);
@@ -33,7 +33,7 @@ export const useAsync = (asyncFunction: Function, immediate = false) => {
           }
 
           if (!response.ok) {
-            throw new Error(response?.message || 'Request failed');
+            throw new Error(response?.message || "Request failed");
           }
 
           return response;
@@ -43,13 +43,11 @@ export const useAsync = (asyncFunction: Function, immediate = false) => {
           setStatus(AsyncStatus.Success);
         })
         .catch((err: any) => {
-          if (process.env.NODE_ENV === 'development') {
-            // console.error('Error', err);
+          if (process.env.NODE_ENV === "development") {
+            /* */
           }
 
-          if (!mounted.current) {
-            return;
-          }
+          if (!mounted.current) return;
 
           setError(err);
           setStatus(AsyncStatus.Error);
@@ -58,37 +56,28 @@ export const useAsync = (asyncFunction: Function, immediate = false) => {
     [asyncFunction]
   );
 
-  const reset = React.useCallback(
-    () => {
-      setStatus(AsyncStatus.Idle);
-      setValue(null);
-      setError(null);
-    },
-    []
-  );
+  const reset = React.useCallback(() => {
+    setStatus(AsyncStatus.Idle);
+    setValue(null);
+    setError(null);
+  }, []);
 
   // Call execute if we want to fire it right away.
   // Otherwise execute can be called later, such as
   // in an onClick handler.
-  React.useEffect(
-    () => {
-      if (immediate) {
-        execute();
-      }
-    },
-    [execute, immediate]
-  );
+  React.useEffect(() => {
+    if (immediate) {
+      execute();
+    }
+  }, [execute, immediate]);
 
-  React.useEffect(
-    () => {
-      mounted.current = true;
+  React.useEffect(() => {
+    mounted.current = true;
 
-      return () => {
-        mounted.current = false;
-      };
-    },
-    []
-  );
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   return {
     execute,
@@ -99,6 +88,6 @@ export const useAsync = (asyncFunction: Function, immediate = false) => {
     isError: status === AsyncStatus.Error,
     isIdle: status === AsyncStatus.Idle,
     isLoading: status === AsyncStatus.Loading,
-    isSuccess: status === AsyncStatus.Success
+    isSuccess: status === AsyncStatus.Success,
   };
 };
