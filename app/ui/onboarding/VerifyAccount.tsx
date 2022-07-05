@@ -145,7 +145,7 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
               <React.Fragment>
                 <Input
                   autoCompleteType={"email"}
-                  inputStyle={{ color: theme?.TextColor }}
+                  inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
                   onChangeText={setEmail}
                   value={email}
                   inputContainerStyle={[
@@ -178,7 +178,7 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
               <Text style={passwordText}>
                 {hasVerificationCode
                   ? "Don't have the verification code?"
-                  : "Have verification code?"}
+                  : "Have the verification code?"}
               </Text>
             </TouchableOpacity>
           </View>
@@ -186,7 +186,7 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
         {accountVerified &&
           Popup.show({
             type: "Success",
-            title: "Account Verified",
+            title: "Account verified.",
             button: true,
             textBody: "Successfully verified account.",
             buttonText: "Ok",
@@ -201,7 +201,7 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
       {errorMessage
         ? Popup.show({
             type: "Danger",
-            title: "Request Failed",
+            title: "Request Failed.",
             button: true,
             textBody: errorMessage || "Failed to verify your email.",
             buttonText: "Ok",
