@@ -1,56 +1,56 @@
-import { StyleSheet, TextStyle, View } from 'react-native';
+import { StyleSheet, TextStyle, View } from "react-native";
 
-import React from 'react';
+import React from "react";
 
-import { Input } from 'react-native-elements';
+import { Input } from "react-native-elements";
 
-import { scale, verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from "react-native-size-matters";
 
-import useAppState from 'hooks/useAppState';
+import useAppState from "hooks/useAppState";
 
-import { Api, Button } from 'common';
+import { Api, Button } from "common";
 
-import { RequestOptions } from 'types';
+import { RequestOptions } from "types";
 
-import { useAsync } from 'hooks';
+import { useAsync } from "hooks";
 
 type IProps = {
   setErrorMessage: Function;
   setPasswordChanged: Function;
-  token: string
+  token: string;
 };
 
 export const ChangePassword: React.FC<IProps> = ({
   setErrorMessage,
   setPasswordChanged,
-  token
+  token,
 }) => {
   const { theme, user } = useAppState();
-  const [verificationCode, setVerificationCode] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [confirmPass, setConfirmPass] = React.useState<string>('');
+  const [verificationCode, setVerificationCode] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [confirmPass, setConfirmPass] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const labelStyle: TextStyle = {
     color: theme?.TextColor,
     fontSize: verticalScale(11),
     lineHeight: verticalScale(13),
-    textTransform: 'uppercase',
-    marginBottom: 6
+    textTransform: "uppercase",
+    marginBottom: 6,
   };
 
   const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post('/change-password', {
+    return Api.post("/change-password", {
       data: {
-        code: Number(data?.code || '0'),
-        password: data?.password
+        code: Number(data?.code || "0"),
+        password: data?.password,
       },
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token || user?.token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token || user?.token}`,
+      },
     })
-      .then(async(res) => {
+      .then(async (res) => {
         if (!res.ok) {
           const response = await res.json();
 
@@ -75,63 +75,63 @@ export const ChangePassword: React.FC<IProps> = ({
     execute({ data });
   }, []);
 
-  const changePass = async() => {
+  const changePass = async () => {
     setIsLoading(true);
     getVerificationCode({
       data: {
         code: verificationCode,
-        password
-      }
+        password,
+      },
     });
   };
 
   return (
     <View>
       <Input
-        autoCompleteType={'off'}
-        inputStyle={{ color: theme?.TextColor }}
+        autoCompleteType={"off"}
+        inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
         onChangeText={setVerificationCode}
         value={verificationCode}
         inputContainerStyle={[
           styles.input,
           {
-            borderColor: theme?.MiddleColor
-          }
+            borderColor: theme?.MiddleColor,
+          },
         ]}
         labelStyle={labelStyle}
-        autoCapitalize={'none'}
-        label='Verification Code'
+        autoCapitalize={"none"}
+        label="Verification Code"
       />
       <Input
-        autoCompleteType={'off'}
-        inputStyle={{ color: theme?.TextColor }}
+        autoCompleteType={"off"}
+        inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
         inputContainerStyle={[
           styles.input,
           {
-            borderColor: theme?.MiddleColor
-          }
+            borderColor: theme?.MiddleColor,
+          },
         ]}
         labelStyle={labelStyle}
         value={password}
         secureTextEntry
         onChangeText={setPassword}
-        label='Password'
+        label="Password"
       />
 
       <Input
-        inputStyle={{ color: theme?.TextColor }}
-        autoCompleteType={'off'}
+        inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
+        autoCompleteType={"off"}
         inputContainerStyle={[
           styles.input,
           {
-            borderColor: theme?.MiddleColor
-          }
+            borderColor: theme?.MiddleColor,
+          },
         ]}
         labelStyle={labelStyle}
         value={confirmPass}
         secureTextEntry
         onChangeText={setConfirmPass}
-        label='Confirm Password'
+        label="Confirm Password"
       />
       <Button
         disabled={!verificationCode || password !== confirmPass}
@@ -139,9 +139,9 @@ export const ChangePassword: React.FC<IProps> = ({
         onPress={changePass}
         style={{
           backgroundColor: theme?.MiddleColor,
-          marginBottom: scale(10)
+          marginBottom: scale(10),
         }}
-        title={'Verify Account'}
+        title={"Verify Account"}
       />
     </View>
   );
@@ -152,6 +152,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     paddingVertical: 5,
-    paddingHorizontal: 5
-  }
+    paddingHorizontal: 5,
+  },
 });
