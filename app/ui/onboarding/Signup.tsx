@@ -133,7 +133,9 @@ export const Signup = () => {
           <View>
             <Input
               autoCompleteType={"email"}
-              inputStyle={{ color: theme?.TextColor }}
+              placeholder={"your@email.com"}
+              placeholderTextColor={"grey"}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }} 
               onChangeText={setEmail}
               value={email}
               inputContainerStyle={[
@@ -149,7 +151,7 @@ export const Signup = () => {
 
             <Input
               autoCompleteType={"off"}
-              inputStyle={{ color: theme?.TextColor }}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               onChangeText={setUsername}
               value={username}
               inputContainerStyle={[
@@ -165,7 +167,7 @@ export const Signup = () => {
 
             <Input
               autoCompleteType={"off"}
-              inputStyle={{ color: theme?.TextColor }}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               inputContainerStyle={[
                 styles.input,
                 {
@@ -181,7 +183,7 @@ export const Signup = () => {
 
             <Input
               autoCompleteType={"off"}
-              inputStyle={{ color: theme?.TextColor }}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               inputContainerStyle={[
                 styles.input,
                 {
