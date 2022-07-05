@@ -49,6 +49,7 @@ export const Login = () => {
     color: theme?.TextColor,
     fontSize: verticalScale(13),
     lineHeight: verticalScale(15),
+    textDecorationLine: "underline",
     textAlign: "right",
     fontFamily: Inter.Regular,
     marginBottom: verticalScale(10),
@@ -78,13 +79,13 @@ export const Login = () => {
 
         return res.json();
       })
-      .then((res: any) => {
+      .then((res) => {
         setIsLoading(false);
         updateLogin(res?.result);
 
         return res;
       })
-      .catch((e: any) => {
+      .catch((e) => {
         setErrorMessage(e.message);
         setIsLoading(false);
         setLoginError(true);
@@ -130,7 +131,7 @@ export const Login = () => {
           </Text>
           <View>
             <Input
-              inputStyle={{ color: theme?.TextColor }}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               autoCompleteType={"email"}
               onChangeText={setEmail}
               value={email}
@@ -146,7 +147,7 @@ export const Login = () => {
             />
 
             <Input
-              inputStyle={{ color: theme?.TextColor }}
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               autoCompleteType={"off"}
               inputContainerStyle={[
                 styles.input,
@@ -206,7 +207,7 @@ export const Login = () => {
                 },
               ]}
             >
-              Your email has not yet been verified
+              Your email has not been verified yet.
             </Text>
             <TouchableOpacity
               onPress={() =>
