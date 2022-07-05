@@ -83,7 +83,7 @@ export const VerifyCode: React.FC<IProps> = ({
     <View>
       <Input
         autoCompleteType={"email"}
-        inputStyle={{ color: theme?.TextColor }}
+        inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
         onChangeText={setVerificationCode}
         value={verificationCode}
         inputContainerStyle={[
