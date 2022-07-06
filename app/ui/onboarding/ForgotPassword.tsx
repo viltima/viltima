@@ -138,7 +138,7 @@ export const ForgotPassword = () => {
             ) : (
               <React.Fragment>
                 <Input
-                  inputStyle={{ color: theme?.TextColor }}
+                  inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
                   autoCompleteType={"email"}
                   onChangeText={setEmail}
                   value={email}

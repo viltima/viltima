@@ -136,7 +136,7 @@ export const Signup = () => {
               autoCompleteType={"email"}
               placeholder={"your@email.com"}
               placeholderTextColor={"grey"}
-              inputStyle={{ color: theme?.TextColor, textAlign: "center" }} 
+              inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
               onChangeText={setEmail}
               value={email}
               inputContainerStyle={[
