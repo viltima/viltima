@@ -27,10 +27,8 @@ export class Api {
       headers,
     };
 
-    if (data) {
-      options.body = JSON.stringify(data);
-    }
-
+    if (data) options.body = JSON.stringify(data);
+  
     return fetch(url as string, options);
   }
 }
