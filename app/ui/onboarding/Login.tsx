@@ -55,41 +55,36 @@ export const Login = () => {
     marginBottom: verticalScale(10),
   };
 
-  const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post("/login", {
-      data: {
-        email: data?.email,
-        username: data?.username,
-        password: data?.password,
-      },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res: any) => {
-        if (!res.ok) {
-          const response = await res.json();
-
-          if (response?.message?.toLowerCase().includes("not verified")) {
-            setUserVerified(false);
-          }
-
-          throw new Error(response.message);
-        }
-
-        return res.json();
-      })
-      .then((res) => {
-        setIsLoading(false);
-        updateLogin(res?.result);
-
-        return res;
-      })
-      .catch((e) => {
-        setErrorMessage(e.message);
-        setIsLoading(false);
-        setLoginError(true);
+  const { execute } = useAsync(async ({ data }: RequestOptions) => {
+    try {
+      const res = await Api.post("/login", {
+        data: {
+          email: data?.email,
+          username: data?.username,
+          password: data?.password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      const response = await res.json();
+      if (!response.ok) {
+        if (response?.message?.toLowerCase().includes("not verified")) {
+          setUserVerified(false);
+        }
+        throw new Error(response.message);
+      }
+
+      setIsLoading(false);
+      updateLogin(response?.result);
+
+      return response;
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+      setLoginError(true);
+    }
   });
 
   const userLogin = React.useCallback(({ data }: RequestOptions) => {
