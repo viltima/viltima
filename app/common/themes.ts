@@ -1,6 +1,6 @@
-import { Colors } from 'common/colors';
+import { Colors } from "common/colors";
 
-import { AnyObj } from 'types';
+import { AnyObj } from "types";
 
 export const Themes: AnyObj = {
   Light: {
@@ -8,13 +8,13 @@ export const Themes: AnyObj = {
     MiddleColor: Colors.Olive,
     EndColor: Colors.White,
     TextColor: Colors.Black,
-    name: 'Light'
+    name: "Light",
   },
   Main: {
     StartColor: Colors.LightGray,
     MiddleColor: Colors.Olive,
     EndColor: Colors.Black,
     TextColor: Colors.White,
-    name: 'Main'
-  }
+    name: "Main",
+  },
 };

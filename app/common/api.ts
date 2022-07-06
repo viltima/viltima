@@ -1,6 +1,6 @@
-import { RequestOptions } from 'types';
+import { RequestOptions } from "types";
 
-import { Environment } from 'common/environment';
+import { Environment } from "common/environment";
 
 export class Api {
   static getUrl(url: string) {
@@ -9,14 +9,14 @@ export class Api {
 
   static get(url: string, options: RequestOptions) {
     options.url = Api.getUrl(url);
-    options.method = 'GET';
+    options.method = "GET";
 
     return Api.request(options);
   }
 
   static post(url: string, options: RequestOptions) {
     options.url = Api.getUrl(url);
-    options.method = 'POST';
+    options.method = "POST";
 
     return Api.request(options);
   }
@@ -24,7 +24,7 @@ export class Api {
   static request({ url, method, data, headers }: RequestOptions) {
     const options: RequestOptions = {
       method,
-      headers
+      headers,
     };
 
     if (data) {
