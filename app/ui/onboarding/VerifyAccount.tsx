@@ -104,6 +104,12 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
     });
   };
 
+  /* 
+  @moduledoc
+  Here we tell React that our component needs to do something after render. 
+  
+  React will remember the function we pass(ed) here and calls it later after performing the DOM updates.
+  */
   React.useEffect(() => {
     setHasVerificationCode(hasCode);
   }, [hasCode]);
