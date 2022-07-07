@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+import{ HOST_URL } from '@env'
 
 export const Environment = {
   Dev: {
-    host: process.env.HOST, // URL for the backend
+    host: `${HOST_URL}`, // URL for the backend
     apiBase: "/api/v1",
   },
 };

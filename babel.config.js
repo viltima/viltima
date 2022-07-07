@@ -15,7 +15,17 @@ module.exports = function(api) {
             underscore: 'lodash'
           }
         }
-      ]
+      ],
+      ["module:react-native-dotenv", {
+        "envName": "react-native-dotenv",
+        "moduleName": "@env",
+        "path": ".env",
+        "blocklist": null,
+        "allowlist": null,
+        "safe": true,
+        "allowUndefined": false,
+        "verbose": false
+      }]
     ]
   };
 };
