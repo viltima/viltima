@@ -60,37 +60,32 @@ export const ForgotPassword = () => {
     marginBottom: verticalScale(10),
   };
 
-  const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post("/code", {
-      data: {
-        email: data?.email,
-      },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const response = await res.json();
-
-          throw new Error(response.message);
-        }
-
-        return res.json();
-      })
-      .then((res) => {
-        setIsLoading(false);
-        onboardUser(res?.result);
-        setToken(res?.result?.token);
-        setMessage(res?.result?.message);
-        setSentVerificationCode(true);
-
-        return res;
-      })
-      .catch((e: any) => {
-        setErrorMessage(e.message);
-        setIsLoading(false);
+  const { execute } = useAsync(async ({ data }: RequestOptions) => {
+    try {
+      const res = await Api.post("/code", {
+        data: {
+          email: data?.email,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+      const response = await res.json();
+      if (!res.ok) {
+        throw new Error(response.message);
+      }
+
+      setIsLoading(false);
+      onboardUser(response?.result);
+      setToken(response?.result?.token);
+      setMessage(response?.result?.message);
+      setSentVerificationCode(true);
+
+      return response;
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    }
   });
 
   const getVerificationCode = React.useCallback(({ data }: RequestOptions) => {
@@ -140,6 +135,7 @@ export const ForgotPassword = () => {
                 <Input
                   inputStyle={{ color: theme?.TextColor, textAlign: "center" }}
                   autoCompleteType={"email"}
+                  placeholder={"your@email.com"}
                   onChangeText={setEmail}
                   value={email}
                   inputContainerStyle={[
