@@ -13,7 +13,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import { Inter } from 'common/fonts';
 
 type IProps = {
-  onPress: () => void,
+  onPress: () => void, // no data is being returned 
   title: string,
   style: ViewStyle,
   [x: string]: any,
