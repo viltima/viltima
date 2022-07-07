@@ -14,6 +14,7 @@ import { RequestOptions } from "types";
 
 import { useAsync } from "hooks";
 
+// object types, cuz ... why not?
 type IProps = {
   setErrorMessage: Function;
   setPasswordChanged: Function;

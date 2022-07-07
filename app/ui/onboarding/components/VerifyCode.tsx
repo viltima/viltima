@@ -35,35 +35,30 @@ export const VerifyCode: React.FC<IProps> = ({
     marginBottom: 6,
   };
 
-  const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post("/verify", {
-      data: {
-        code: Number(data?.code || "0"),
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user?.token}`,
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const response = await res.json();
-
-          throw new Error(response.message);
-        }
-
-        return res.json();
-      })
-      .then((res) => {
-        setIsLoading(false);
-        setAccountVerified(true);
-
-        return res;
-      })
-      .catch((e) => {
-        setErrorMessage(e.message);
-        setIsLoading(false);
+  const { execute } = useAsync(async ({ data }: RequestOptions) => {
+    try {
+      const res = await Api.post("/verify", {
+        data: {
+          code: Number(data?.code || "0"),
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
       });
+      const response = await res.json();
+      if (!res.ok) {
+        throw new Error(response.message);
+      }
+
+      setIsLoading(false);
+      setAccountVerified(true);
+
+      return response;
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    }
   });
 
   const getVerificationCode = React.useCallback(({ data }: RequestOptions) => {
