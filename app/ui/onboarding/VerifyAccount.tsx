@@ -65,35 +65,30 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
     marginBottom: verticalScale(10),
   };
 
-  const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post("/code", {
-      data: {
-        email: data?.email,
-      },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const response = await res.json();
-
-          throw new Error(response.message);
-        }
-
-        return res.json();
-      })
-      .then((res) => {
-        setIsLoading(false);
-        onboardUser(res?.result);
-        setHasVerificationCode(true);
-
-        return res;
-      })
-      .catch((e) => {
-        setErrorMessage(e.message);
-        setIsLoading(false);
+  const { execute } = useAsync(async ({ data }: RequestOptions) => {
+    try {
+      const res = await Api.post("/code", {
+        data: {
+          email: data?.email,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+      const response = await res.json();
+      if (!res.ok) {
+        throw new Error(response.message);
+      }
+
+      setIsLoading(false);
+      onboardUser(response?.result);
+      setHasVerificationCode(true);
+
+      return response;
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    }
   });
 
   const getVerificationCode = React.useCallback(({ data }: RequestOptions) => {
