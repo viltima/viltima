@@ -56,6 +56,7 @@ export const ForgotPassword = () => {
     fontSize: verticalScale(13),
     lineHeight: verticalScale(15),
     textAlign: "right",
+    textDecorationLine: "underline",
     fontFamily: Inter.Regular,
     marginBottom: verticalScale(10),
   };

@@ -39,36 +39,32 @@ export const ChangePassword: React.FC<IProps> = ({
     marginBottom: 6,
   };
 
-  const { execute } = useAsync(({ data }: RequestOptions) => {
-    return Api.post("/change-password", {
-      data: {
-        code: Number(data?.code || "0"),
-        password: data?.password,
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token || user?.token}`,
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const response = await res.json();
-
-          throw new Error(response.message);
-        }
-
-        return res.json();
-      })
-      .then((res) => {
-        setIsLoading(false);
-        setPasswordChanged(true);
-
-        return res;
-      })
-      .catch((e) => {
-        setErrorMessage(e.message);
-        setIsLoading(false);
+  const { execute } = useAsync(async ({ data }: RequestOptions) => {
+    try {
+      const res = await Api.post("/change-password", {
+        data: {
+          code: Number(data?.code || "0"),
+          password: data?.password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token || user?.token}`,
+        },
       });
+      const response = await res.json();
+
+      if (!res.ok) {
+        throw new Error(response.message);
+      }
+
+      setIsLoading(false);
+      setPasswordChanged(true);
+
+      return response;
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    }
   });
 
   const getVerificationCode = React.useCallback(({ data }: RequestOptions) => {
