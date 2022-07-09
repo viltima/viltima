@@ -61,6 +61,7 @@ export const VerifyAccount: React.FC<Props<"VerifyAccount">> = ({ route }) => {
     fontSize: verticalScale(13),
     lineHeight: verticalScale(15),
     textAlign: "right",
+    textDecorationLine: "underline",
     fontFamily: Inter.Regular,
     marginBottom: verticalScale(10),
   };
