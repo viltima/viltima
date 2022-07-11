@@ -90,7 +90,7 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
           dispatch({
             type: LOGOUT,
           });
-        } catch (error) {}
+        } catch (error) { }
       },
       onboardUser: (user: User) => {
         dispatch({
