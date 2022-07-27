@@ -28,13 +28,9 @@ export const useAsync = (asyncFunction: Function, immediate = false) => {
 
       return asyncFunction(...args)
         .then((response: any) => {
-          if (!mounted.current) {
-            return;
-          }
+          if (!mounted.current) return;
 
-          if (!response.ok) {
-            throw new Error(response?.message || "Request failed");
-          }
+          if (!response.ok) throw new Error(response?.message || "Request failed");
 
           return response;
         })
