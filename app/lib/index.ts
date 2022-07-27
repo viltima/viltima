@@ -1,8 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { disposed } from "mailify";
 import jwtDecode from "jwt-decode";
-export const validateEmail = (email: string) => {
+
+export const validateEmail = async (email: string) => {
   const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  // TODO: 
+  // const check = await disposed(email);
+  // if(check.disposable) return -> use another email address
 
   return regexp.test(email);
 };
