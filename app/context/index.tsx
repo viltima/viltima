@@ -71,13 +71,9 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
       checkStorage: async (key: string, type: string) => {
         const result: AnyObj = await getData(`@${key}`);
 
-        if (!result) {
-          return;
-        }
+        if (!result) return;
 
-        if (type === LOGIN && validateAccessToken(result[key]?.token)) {
-          return;
-        }
+        if (type === LOGIN && validateAccessToken(result[key]?.token)) return;
 
         dispatch({
           type,
