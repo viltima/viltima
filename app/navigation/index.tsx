@@ -2,19 +2,19 @@ import {
   NavigationContainer,
   DefaultTheme,
   Theme,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Colors, Inter, LOGIN } from "common";
+import { Colors, Inter, LOGIN } from 'common';
 
-import useAppState from "hooks/useAppState";
+import useAppState from 'hooks/useAppState';
 
-import * as SplashScreen from "expo-splash-screen";
+import * as SplashScreen from 'expo-splash-screen';
 
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons';
 
-import * as Font from "expo-font";
+import * as Font from 'expo-font';
 
 import {
   Inter_100Thin,
@@ -26,15 +26,28 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
   Inter_900Black,
-} from "@expo-google-fonts/inter";
+} from '@expo-google-fonts/inter';
 
-import { ForgotPassword, Home, Login, Signup, VerifyAccount } from "ui";
+import {
+  ForgotPassword,
+  Home,
+  Login,
+  Message,
+  Signup,
+  VerifyAccount,
+} from 'ui';
 
-import React from "react";
+import React from 'react';
 
-import { View } from "react-native";
+import { View } from 'react-native';
 
-import { StackParamList } from "types";
+import { StackParamList, User } from 'types';
+
+import { MainStack } from 'navigation/main';
+
+import io from 'socket.io-client';
+
+import { SOCKET_HOST } from '@env';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -44,58 +57,31 @@ const Onboarding = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: "",
+        headerTitle: '',
         headerShadowVisible: false,
         headerStyle: {
           backgroundColor: theme?.StartColor,
         },
       }}
     >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
-    </Stack.Navigator>
-  );
-};
-
-const HomeStack = () => {
-  const { theme, signOut } = useAppState();
-
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTintColor: theme?.TextColor,
-        headerShadowVisible: false,
-        headerTitle: "",
-        headerTitleStyle: {
-          fontFamily: Inter.Regular,
-        },
-        headerStyle: {
-          backgroundColor: theme?.MiddleColor,
-        },
-      }}
-    >
-      <Stack.Screen
-        options={{
-          headerRight: ({ tintColor }) => (
-            <MaterialIcons
-              onPress={() => signOut()}
-              name="logout"
-              size={24}
-              color={tintColor}
-            />
-          ),
-        }}
-        name="Home"
-        component={Home}
-      />
+      <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
+      <Stack.Screen name='Signup' component={Signup} />
+      <Stack.Screen name='VerifyAccount' component={VerifyAccount} />
     </Stack.Navigator>
   );
 };
 
 export const AppNavigator = () => {
-  const { isLoggedIn, theme, checkStorage } = useAppState();
+  const {
+    isLoggedIn,
+    theme,
+    checkStorage,
+    setSocket,
+    updateUsers,
+    updateRooms,
+    setSocketId,
+  } = useAppState();
 
   const MyTheme: Theme = {
     ...DefaultTheme,
@@ -106,6 +92,27 @@ export const AppNavigator = () => {
   };
 
   const [appIsReady, setAppIsReady] = React.useState(false);
+
+  React.useEffect(() => {
+    const socket = io(SOCKET_HOST, {
+      autoConnect: false,
+    });
+
+    socket.connect();
+    socket.on('new_user', (_users: User[]) => {
+      updateUsers(_users);
+    });
+
+    socket.on('joined_room', (room: string) => {
+        updateRooms(room);
+    });
+
+    socket.on('my_socket', (socketId) => {
+      setSocketId(socketId);
+    });
+
+    setSocket(socket);
+  }, []);
 
   React.useEffect(() => {
     async function prepare() {
@@ -125,7 +132,7 @@ export const AppNavigator = () => {
           Inter_900Black,
         });
 
-        checkStorage("auth", LOGIN).catch(() => {
+        checkStorage('auth', LOGIN).catch(() => {
           /*  */
         });
       } catch (e) {
@@ -154,7 +161,7 @@ export const AppNavigator = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {isLoggedIn ? <HomeStack /> : <Onboarding />}
+      {isLoggedIn ? <MainStack /> : <Onboarding />}
     </NavigationContainer>
   );
 };

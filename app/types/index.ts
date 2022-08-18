@@ -1,8 +1,14 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { IMessage } from 'react-native-gifted-chat';
+import { Socket } from 'socket.io-client';
 
 export interface Action {
   type: string,
-  payload?: object | string | boolean
+  payload?: object | string | boolean,
+  user?: User,
+  users?: User[],
+  key?: string,
+  messages?: IMessage[]
 }
 
 export interface Theme {
@@ -18,18 +24,45 @@ export interface User {
   username?: string,
   verified?: boolean,
   message?: string,
-  token?: string
+  token?: string,
+  sid?: string
+}
+
+export interface InitState {
+  theme: Theme,
+    isLoggedIn: boolean,
+    messages: {[key:string]: IMessage[]},
+    user: User,
+    users: User[],
+    rooms: string[],
+    socket: Socket | undefined,
+    socketId: string
 }
 
 export interface State {
   isLoggedIn?: boolean,
   theme?: Theme,
   user?: User,
+  socket?: Socket,
+  users?: User[],
+  rooms?: string[],
+  socketId?: string,
+  messages?: {[key:string]: IMessage[]},
+  updateUsers: (users: User[]) => void,
+  updateRooms: (room: string) => void,
+  removeRoom: (room: string) => void,
+  setSocket: (socket: Socket) => void,
   updateLogin: (result: any) => void,
   changeTheme: (theme: Theme) => void,
   checkStorage: (key: string, type: string) => Promise<void>,
   signOut: () => void,
-  onboardUser: (user: User) => void
+  onboardUser: (user: User) => void,
+  addMessage: (key: string,messages: IMessage[]) => void,
+  setSocketId: (socketId: string) => void
+}
+
+export interface Messages {
+  [key: string]: IMessage[];
 }
 
 export interface RequestOptions {
@@ -47,6 +80,8 @@ export interface AnyObj {
 export type StackParamList = {
   Login: undefined,
   Signup: undefined,
+  Message: undefined,
+  RoomMessage: undefined,
   VerifyAccount: {
     hasCode: boolean
   },

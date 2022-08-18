@@ -93,7 +93,8 @@ export const Login = () => {
 
   const login = async () => {
     setIsLoading(true);
-    const usernameOrEmail = validateEmail(email) ? "email" : "username";
+    const usernameOrEmail = await validateEmail(email) ? "email" : "username";
+
     userLogin({
       data: {
         [usernameOrEmail]: email,
