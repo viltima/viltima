@@ -1,6 +1,6 @@
-import { AppStateProvider } from 'context';
+import { AppStateProvider } from "context";
 
-import { AppNavigator } from 'navigation';
+import { AppNavigator } from "navigation";
 
 export default function App() {
   return (

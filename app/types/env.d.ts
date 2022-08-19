@@ -1,4 +1,4 @@
-declare module '@env' {
-    export const HOST_URL: string;
-    export const SOCKET_HOST: string;
+declare module "@env" {
+  export const HOST_URL: string;
+  export const SOCKET_HOST: string;
 }

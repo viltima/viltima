@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import { Colors } from 'common/colors';
-import { Inter } from 'common/fonts';
-import { scale, verticalScale } from 'react-native-size-matters';
+import PropTypes from "prop-types";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { Colors } from "common/colors";
+import { Inter } from "common/fonts";
+import { scale, verticalScale } from "react-native-size-matters";
 
 // object types, cuz ... why not?
 type IProps = {
@@ -47,7 +47,7 @@ export const Tabs: React.FC<IProps> = ({
 
 const styles = StyleSheet.create({
   loginTabs: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: Colors.Olive,
     paddingTop: scale(20),
   },
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.White,
   },
   tabText: {
-    textAlign: 'center',
-    textTransform: 'capitalize',
+    textAlign: "center",
+    textTransform: "capitalize",
     fontSize: verticalScale(14),
     color: Colors.LightGray,
     fontFamily: Inter.Regular,

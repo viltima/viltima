@@ -6,7 +6,7 @@ import jwtDecode from "jwt-decode";
 export const validateEmail = async (email: string) => {
   const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-  // TODO: 
+  // TODO:
   // const check = await disposed(email);
   // if(check.disposable) return -> use another email address
 

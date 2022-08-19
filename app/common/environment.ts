@@ -1,4 +1,4 @@
-import{ HOST_URL } from '@env'
+import { HOST_URL } from "@env";
 
 export const Environment = {
   Dev: {

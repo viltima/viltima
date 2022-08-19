@@ -4,12 +4,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
-import useAppState from 'hooks/useAppState';
-import { ChatRow } from 'ui/home/components/ChatRow';
-import { scale, verticalScale } from 'react-native-size-matters';
+} from "react-native";
+import React from "react";
+import { FontAwesome } from "@expo/vector-icons";
+import useAppState from "hooks/useAppState";
+import { ChatRow } from "ui/home/components/ChatRow";
+import { scale, verticalScale } from "react-native-size-matters";
 import {
   Button,
   Colors,
@@ -17,15 +17,15 @@ import {
   RadioButton,
   RadioGroup,
   TextField,
-} from 'react-native-ui-lib';
+} from "react-native-ui-lib";
 
 const INPUT_SPACING = 10;
 
 export const Rooms = () => {
   const [showDialog, setShowDialog] = React.useState(false);
   const [showJoinDialog, setShowJoinDialog] = React.useState(false);
-  const [roomName, setRoomName] = React.useState('');
-  const [joinRoom, setJoinRoom] = React.useState('');
+  const [roomName, setRoomName] = React.useState("");
+  const [joinRoom, setJoinRoom] = React.useState("");
   const [isPrivate, setIsPrivate] = React.useState(true);
   const { rooms, socket, user } = useAppState();
 
@@ -33,15 +33,15 @@ export const Rooms = () => {
     if (rooms?.includes(roomName)) {
       return;
     }
-    socket?.emit('join_room', { user, roomName: roomName.trim() });
+    socket?.emit("join_room", { user, roomName: roomName.trim() });
     setShowDialog(false);
-    setRoomName('');
+    setRoomName("");
   };
 
   const join = () => {
-    socket?.emit('join_room', { user, roomName: joinRoom.trim() });
+    socket?.emit("join_room", { user, roomName: joinRoom.trim() });
     setShowJoinDialog(false);
-    setJoinRoom('');
+    setJoinRoom("");
   };
 
   return (
@@ -62,10 +62,10 @@ export const Rooms = () => {
       <View>
         {/* Create Room */}
         <Dialog
-          bottom={'bottom'}
+          bottom={"bottom"}
           onDismiss={() => setShowDialog(false)}
           visible={showDialog}
-          panDirection={'down'}
+          panDirection={"down"}
           containerStyle={[
             styles.dialog,
             {
@@ -78,7 +78,7 @@ export const Rooms = () => {
             onChangeText={setRoomName}
             text70
             containerStyle={{ marginBottom: INPUT_SPACING }}
-            placeholder='Room name'
+            placeholder="Room name"
             migrate
           />
           <Text>Private room</Text>
@@ -87,15 +87,15 @@ export const Rooms = () => {
             initialValue={isPrivate}
             onValueChange={(answer: boolean) => setIsPrivate(answer)}
           >
-            <RadioButton value={true} label={'Yes'} />
-            <RadioButton marginT-5 value={false} label={'No'} />
+            <RadioButton value={true} label={"Yes"} />
+            <RadioButton marginT-5 value={false} label={"No"} />
           </RadioGroup>
 
           <Button
             disabled={!roomName}
             onPress={createRoom}
             marginT-10
-            label={'Create'}
+            label={"Create"}
             size={Button.sizes.medium}
             backgroundColor={Colors.green10}
           />
@@ -104,10 +104,10 @@ export const Rooms = () => {
         {/* Join room */}
 
         <Dialog
-          bottom={'bottom'}
+          bottom={"bottom"}
           onDismiss={() => setShowJoinDialog(false)}
           visible={showJoinDialog}
-          panDirection={'down'}
+          panDirection={"down"}
           containerStyle={[
             styles.dialog,
             {
@@ -120,7 +120,7 @@ export const Rooms = () => {
             onChangeText={setJoinRoom}
             text70
             containerStyle={{ marginBottom: INPUT_SPACING }}
-            placeholder='Room name'
+            placeholder="Room name"
             migrate
           />
 
@@ -128,7 +128,7 @@ export const Rooms = () => {
             disabled={!joinRoom}
             onPress={join}
             marginT-10
-            label={'Join'}
+            label={"Join"}
             size={Button.sizes.medium}
             backgroundColor={Colors.green10}
           />
@@ -142,7 +142,7 @@ export const Rooms = () => {
             style={styles.join}
             onPress={() => setShowJoinDialog(true)}
           >
-            <FontAwesome name='users' size={24} color={Colors.white} />
+            <FontAwesome name="users" size={24} color={Colors.white} />
           </TouchableOpacity>
         </View>
       </View>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   createRoom: {
     fontSize: verticalScale(16),
     color: Colors.white,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginHorizontal: scale(20),
     paddingVertical: verticalScale(20),
   },
@@ -170,9 +170,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
   },
   rooms: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   join: {
     marginHorizontal: scale(20),

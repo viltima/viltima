@@ -1,10 +1,10 @@
-import React, { createContext, useMemo, useReducer } from 'react';
+import React, { createContext, useMemo, useReducer } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Action, AnyObj, InitState, State, Theme, User } from 'types';
+import { Action, AnyObj, InitState, State, Theme, User } from "types";
 
 import {
   BOARDING,
@@ -18,11 +18,11 @@ import {
   UPDATE_MESSAGES,
   UPDATE_ROOMS,
   UPDATE_USERS,
-} from 'common';
+} from "common";
 
-import { getData, storeData, validateAccessToken } from 'lib';
-import { Socket } from 'socket.io-client';
-import { IMessage } from 'react-native-gifted-chat';
+import { getData, storeData, validateAccessToken } from "lib";
+import { Socket } from "socket.io-client";
+import { IMessage } from "react-native-gifted-chat";
 
 export const AppContext = createContext<State>({} as State);
 
@@ -37,9 +37,9 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
     messages: {},
     user: {},
     users: [],
-    rooms: ['Public'],
+    rooms: ["Public"],
     socket: undefined,
-    socketId: '',
+    socketId: "",
   };
 
   const reducer = (state: InitState, action: Action): InitState => {
@@ -124,7 +124,7 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
   const appContext = useMemo(
     () => ({
       updateLogin: (result: User) => {
-        storeData('@auth', { auth: result });
+        storeData("@auth", { auth: result });
 
         dispatch({
           type: LOGIN,
@@ -144,7 +144,7 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
       },
       signOut: async () => {
         try {
-          await AsyncStorage.removeItem('@auth');
+          await AsyncStorage.removeItem("@auth");
           dispatch({
             type: LOGOUT,
           });
@@ -163,7 +163,7 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
         });
       },
       changeTheme: (theme: Theme) => {
-        storeData('@theme', { theme: theme.name });
+        storeData("@theme", { theme: theme.name });
         dispatch({
           type: CHANGE_THEME,
           payload: theme,
@@ -195,7 +195,6 @@ export const AppStateProvider: React.FC<Props> = ({ children }) => {
         });
       },
       updateRooms: (room: string) => {
-
         dispatch({
           type: UPDATE_ROOMS,
           payload: room,

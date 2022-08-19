@@ -1,14 +1,21 @@
-import { Alert, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Share,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import React from 'react';
+import React from "react";
 
-import { scale, verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from "react-native-size-matters";
 
-import { useNavigation } from '@react-navigation/core';
-import { Colors, Inter } from 'common';
-import { User, StackParamList } from 'types';
+import { useNavigation } from "@react-navigation/core";
+import { Colors, Inter } from "common";
+import { User, StackParamList } from "types";
 
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 
 // object types, cuz ... why not?
 type IProps = {
@@ -35,12 +42,12 @@ export const ChatRow: React.FC<IProps> = ({ user, isChannel, receiver }) => {
 
   return (
     <View
-      style={{ flexDirection: 'row', paddingRight: 20, alignItems: 'center' }}
+      style={{ flexDirection: "row", paddingRight: 20, alignItems: "center" }}
     >
       <TouchableOpacity
         style={{ flex: 1 }}
         onPress={() =>
-          navigation.navigate(isChannel ? 'RoomMessage' : 'Message', {
+          navigation.navigate(isChannel ? "RoomMessage" : "Message", {
             title: user?.username,
             isChannel: isChannel,
             to: receiver,
@@ -55,16 +62,18 @@ export const ChatRow: React.FC<IProps> = ({ user, isChannel, receiver }) => {
         </View>
         <View style={styles.divider} />
       </TouchableOpacity>
-      {isChannel && <TouchableOpacity onPress={() => onShare(receiver)}>
-        <AntDesign name='sharealt' size={24} color='black' />
-      </TouchableOpacity>}
+      {isChannel && (
+        <TouchableOpacity onPress={() => onShare(receiver)}>
+          <AntDesign name="sharealt" size={24} color="black" />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingVertical: 10,
     borderBottomColor: Colors.LightGray,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -77,14 +86,14 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#E8E6EA',
+    backgroundColor: "#E8E6EA",
     marginHorizontal: 20,
   },
   message: {
     marginLeft: scale(16),
     marginTop: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   lastMessage: {
     color: Colors.Black,

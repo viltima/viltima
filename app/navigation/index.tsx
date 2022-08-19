@@ -2,19 +2,19 @@ import {
   NavigationContainer,
   DefaultTheme,
   Theme,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors, Inter, LOGIN } from 'common';
+import { Colors, Inter, LOGIN } from "common";
 
-import useAppState from 'hooks/useAppState';
+import useAppState from "hooks/useAppState";
 
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from "expo-splash-screen";
 
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
 
-import * as Font from 'expo-font';
+import * as Font from "expo-font";
 
 import {
   Inter_100Thin,
@@ -26,7 +26,7 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
   Inter_900Black,
-} from '@expo-google-fonts/inter';
+} from "@expo-google-fonts/inter";
 
 import {
   ForgotPassword,
@@ -35,19 +35,19 @@ import {
   Message,
   Signup,
   VerifyAccount,
-} from 'ui';
+} from "ui";
 
-import React from 'react';
+import React from "react";
 
-import { View } from 'react-native';
+import { View } from "react-native";
 
-import { StackParamList, User } from 'types';
+import { StackParamList, User } from "types";
 
-import { MainStack } from 'navigation/main';
+import { MainStack } from "navigation/main";
 
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
-import { SOCKET_HOST } from '@env';
+import { SOCKET_HOST } from "@env";
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -57,17 +57,17 @@ const Onboarding = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: '',
+        headerTitle: "",
         headerShadowVisible: false,
         headerStyle: {
           backgroundColor: theme?.StartColor,
         },
       }}
     >
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
-      <Stack.Screen name='Signup' component={Signup} />
-      <Stack.Screen name='VerifyAccount' component={VerifyAccount} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
     </Stack.Navigator>
   );
 };
@@ -99,15 +99,15 @@ export const AppNavigator = () => {
     });
 
     socket.connect();
-    socket.on('new_user', (_users: User[]) => {
+    socket.on("new_user", (_users: User[]) => {
       updateUsers(_users);
     });
 
-    socket.on('joined_room', (room: string) => {
-        updateRooms(room);
+    socket.on("joined_room", (room: string) => {
+      updateRooms(room);
     });
 
-    socket.on('my_socket', (socketId) => {
+    socket.on("my_socket", (socketId) => {
       setSocketId(socketId);
     });
 
@@ -132,7 +132,7 @@ export const AppNavigator = () => {
           Inter_900Black,
         });
 
-        checkStorage('auth', LOGIN).catch(() => {
+        checkStorage("auth", LOGIN).catch(() => {
           /*  */
         });
       } catch (e) {

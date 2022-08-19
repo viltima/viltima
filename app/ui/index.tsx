@@ -3,7 +3,7 @@ export * from "ui/onboarding/Login";
 export * from "ui/onboarding/Signup";
 export * from "ui/onboarding/VerifyAccount";
 export * from "ui/home/Home";
-export * from 'ui/message/Message'
-export * from 'ui/users/Users'
-export * from 'ui/rooms/Rooms'
-export * from 'ui/message/RoomMessage'
+export * from "ui/message/Message";
+export * from "ui/users/Users";
+export * from "ui/rooms/Rooms";
+export * from "ui/message/RoomMessage";

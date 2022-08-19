@@ -12,7 +12,7 @@ export const Colors = {
   LightGray: "#5d6161",
   Olive: "#748404",
 
-  // Exact colors 
+  // Exact colors
 
   Aliceblue: "#f0f8ff",
   Antiquewhite: "#faebd7",
@@ -158,5 +158,5 @@ export const Colors = {
   Wheat: "#f5deb3",
   Whitesmoke: "#f5f5f5",
   Yellow: "#ffff00",
-  Yellowgreen: "#9acd32"  
+  Yellowgreen: "#9acd32",
 };

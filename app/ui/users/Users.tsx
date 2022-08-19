@@ -1,8 +1,8 @@
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
-import useAppState from 'hooks/useAppState';
-import { ChatRow } from 'ui/home/components/ChatRow';
-import { User } from 'types';
+import { StyleSheet, View } from "react-native";
+import React from "react";
+import useAppState from "hooks/useAppState";
+import { ChatRow } from "ui/home/components/ChatRow";
+import { User } from "types";
 
 export const Users = () => {
   const { users } = useAppState();

@@ -16,6 +16,6 @@
     "module": "esnext",
     "noImplicitAny": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
+    "sourceMap": true
   }
 }

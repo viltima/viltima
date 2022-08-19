@@ -1,4 +1,5 @@
 # Balfi
+
 Lotion yourself with a client that you can user anywhere, free and fast.
 
 ## Install dependencies
@@ -8,6 +9,7 @@ $ yarn
 ```
 
 ## Login to your dev account
+
 ```
 $ npx eas login
 ```

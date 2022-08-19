@@ -1,23 +1,21 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { GiftedChat, IMessage } from 'react-native-gifted-chat';
-import useAppState from 'hooks/useAppState';
-import { Messages, StackParamList, User } from 'types';
-import { useNavigation } from '@react-navigation/native';
-import { Colors, Tabs } from 'common';
-import { scale, verticalScale } from 'react-native-size-matters';
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import { GiftedChat, IMessage } from "react-native-gifted-chat";
+import useAppState from "hooks/useAppState";
+import { Messages, StackParamList, User } from "types";
+import { useNavigation } from "@react-navigation/native";
+import { Colors, Tabs } from "common";
+import { scale, verticalScale } from "react-native-size-matters";
 
-import { Entypo } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
 
-type Params ={
-  params: {to: string, isChannel: boolean }
-}
-
-type IProps = {
-  route: Params
+type Params = {
+  params: { to: string; isChannel: boolean };
 };
 
-
+type IProps = {
+  route: Params;
+};
 
 export const RoomMessage: React.FC<IProps> = ({ route }) => {
   const navigation = useNavigation<StackParamList>();
@@ -27,12 +25,11 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
   const [selectedTab, setSelectedTab] = React.useState(0);
   const { user, socket, removeRoom } = useAppState();
   const [usersInRoom, setUsersInRoom] = React.useState<User[]>([]);
-  const [roomOwner, setRoomOwner] = React.useState('');
+  const [roomOwner, setRoomOwner] = React.useState("");
   const [receiver, setReceiver] = React.useState(route.params.to);
 
   React.useEffect(() => {
-    socket?.on('new_message_room', (msg) => {
-
+    socket?.on("new_message_room", (msg) => {
       setMessages((previousMessages) => {
         return {
           ...previousMessages,
@@ -45,18 +42,17 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
   }, [socket]);
 
   React.useEffect(() => {
-    socket?.emit('join_room', { user, roomName: route.params.to });
-    socket?.on('room', (room) => {
+    socket?.emit("join_room", { user, roomName: route.params.to });
+    socket?.on("room", (room) => {
       setRoomOwner(room?.owner);
       setUsersInRoom(room?.users || []);
     });
 
-    socket?.on('remove_me', ({ id, room }) => {
-
+    socket?.on("remove_me", ({ id, room }) => {
       if (id === user?.id) {
-        socket?.emit('leave_room', { id, room });
+        socket?.emit("leave_room", { id, room });
         removeRoom(room);
-        navigation.navigate('Home');
+        navigation.navigate("Home");
       }
     });
   }, []);
@@ -67,7 +63,7 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
 
       setReceiver(to);
 
-      socket?.emit('send_message', {
+      socket?.emit("send_message", {
         content: {
           ...(msg[0] as object),
           user: {
@@ -98,7 +94,7 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
   };
 
   const removeUser = (id: string, room: string) => {
-    socket?.emit('remove_user_from_room', { id, room });
+    socket?.emit("remove_user_from_room", { id, room });
   };
 
   React.useEffect(() => {
@@ -112,7 +108,7 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
       <Tabs
         selectedTab={selectedTab}
         changeTabs={changeTabs}
-        tabs={['Chat', 'Users']}
+        tabs={["Chat", "Users"]}
       />
       {selectedTab === 0 ? (
         <GiftedChat
@@ -135,9 +131,9 @@ export const RoomMessage: React.FC<IProps> = ({ route }) => {
                 disabled={_user?.username === roomOwner}
               >
                 {_user?.username === roomOwner ? (
-                  <Text>{'(admin)'}</Text>
+                  <Text>{"(admin)"}</Text>
                 ) : user?.username === roomOwner ? (
-                  <Entypo name='cross' size={24} color={Colors.Red} />
+                  <Entypo name="cross" size={24} color={Colors.Red} />
                 ) : null}
               </TouchableOpacity>
             </View>
@@ -152,8 +148,8 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: scale(20),
     paddingVertical: scale(5),
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   username: {
     fontSize: verticalScale(16),

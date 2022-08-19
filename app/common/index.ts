@@ -5,4 +5,4 @@ export * from "common/fonts";
 export * from "common/components/Button";
 export * from "common/environment";
 export * from "common/api";
-export * from 'common/components/Tabs'
+export * from "common/components/Tabs";

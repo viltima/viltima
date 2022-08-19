@@ -1,34 +1,32 @@
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 
-import React from 'react';
+import React from "react";
 
-import { scale, verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from "react-native-size-matters";
 
-import useAppState from 'hooks/useAppState';
+import useAppState from "hooks/useAppState";
 
-import { Colors, Inter } from 'common';
+import { Colors, Inter } from "common";
 
-import { ChatRow } from 'ui/home/components/ChatRow';
+import { ChatRow } from "ui/home/components/ChatRow";
 
-import { User } from 'types';
+import { User } from "types";
 
 export const Home = () => {
   const { user, socket, users, rooms } = useAppState();
 
   React.useEffect(() => {
+    if (!socket) return;
 
-    if (!socket) return
-
-    socket.on('connect_error', (err: any) => {
+    socket.on("connect_error", (err: any) => {
       console.log(`connect_error due to ${err.message}`);
     });
 
-    socket.emit('join_server', user);
+    socket.emit("join_server", user);
     // socket.emit('join_room', {user, roomName: 'public'})
-
   }, []);
 
-  const currentUsers = users?.filter(_user => _user.id !== user?.id)
+  const currentUsers = users?.filter((_user) => _user.id !== user?.id);
 
   return (
     <View style={styles.main}>
@@ -46,7 +44,9 @@ export const Home = () => {
             )
           );
         })}
-        {currentUsers?.length ? <Text style={styles.header}>Users online</Text> : null}
+        {currentUsers?.length ? (
+          <Text style={styles.header}>Users online</Text>
+        ) : null}
         {currentUsers?.map((connectedUser: User, idx: number) => {
           return (
             connectedUser && (
@@ -66,25 +66,25 @@ export const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '80%',
+    width: "80%",
     padding: scale(20),
     borderWidth: 1,
-    borderColor:Colors.Gray,
-    borderRadius: scale(20)
+    borderColor: Colors.Gray,
+    borderRadius: scale(20),
   },
   main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   user: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   welcome: {
     fontFamily: Inter.SemiBold,
     fontSize: verticalScale(30),
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
   header: {
     fontSize: scale(18),

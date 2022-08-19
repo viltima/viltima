@@ -1,22 +1,22 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from "react-native";
 
-import React from 'react';
+import React from "react";
 
-import { Button as Btn } from 'react-native-elements';
+import { Button as Btn } from "react-native-elements";
 
-import { Colors } from 'common/colors';
+import { Colors } from "common/colors";
 
-import { scale, verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from "react-native-size-matters";
 
-import { Inter } from 'common/fonts';
+import { Inter } from "common/fonts";
 
 type IProps = {
-  onPress: () => void, // no data is being returned 
-  title: string,
-  style: ViewStyle,
-  [x: string]: any,
+  onPress: () => void; // no data is being returned
+  title: string;
+  style: ViewStyle;
+  [x: string]: any;
 };
 
 export const Button: React.FC<IProps> = ({
@@ -38,18 +38,18 @@ export const Button: React.FC<IProps> = ({
 
 Button.propTypes = {
   onPress: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.Olive,
     paddingVertical: verticalScale(16),
-    borderRadius: scale(15)
+    borderRadius: scale(15),
   },
   titleStyle: {
     fontSize: verticalScale(16),
     fontFamily: Inter.Bold,
-    lineHeight: verticalScale(24)
-  }
+    lineHeight: verticalScale(24),
+  },
 });
