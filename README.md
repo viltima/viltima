@@ -1,39 +1,12 @@
-# Balfi
+# Viltima
 
-Lotion yourself with a client that you can user anywhere, free and fast.
+<p align="center">
+<img src="https://media.discordapp.net/attachments/893792219390156850/1012040022565859369/unknown.png"  alt="xadara" width="400" height="200"/></a>
+<p>
 
-## Install dependencies
+Communicate, everywhere.
 
-```sh
-$ yarn
-```
+### Links
 
-## Login to your dev account
-
-```
-$ npx eas login
-```
-
-## Running the application
-
-```sh
-$ expo start
-```
-
-## Build app for internal testing
-
-```sh
-$ npx eas build --profile preview
-```
-
-Build application for production
-
-```sh
-$ npx eas build --profile preview
-```
-
-## Submit app to app store
-
-```sh
-$ npx eas submit
-```
+- [Docs](https://viltima-docs.vercel.app)
+- [Community [soon]]()
