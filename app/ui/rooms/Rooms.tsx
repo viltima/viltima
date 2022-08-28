@@ -18,6 +18,7 @@ import {
   RadioGroup,
   TextField,
 } from "react-native-ui-lib";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const INPUT_SPACING = 10;
 
@@ -69,7 +70,7 @@ export const Rooms = () => {
           containerStyle={[
             styles.dialog,
             {
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.black,
             },
           ]}
         >
@@ -81,7 +82,7 @@ export const Rooms = () => {
             placeholder="Room name"
             migrate
           />
-          <Text>Private room</Text>
+          <Text style={styles.roomName}>Private room?</Text>
           <RadioGroup
             marginT-8
             initialValue={isPrivate}
@@ -111,7 +112,7 @@ export const Rooms = () => {
           containerStyle={[
             styles.dialog,
             {
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.black,
             },
           ]}
         >
@@ -159,10 +160,14 @@ const styles = StyleSheet.create({
   },
   createRoom: {
     fontSize: verticalScale(16),
-    color: Colors.white,
+    color: Colors.black,
     textTransform: "uppercase",
+    textDecorationLine: "underline",
     marginHorizontal: scale(20),
     paddingVertical: verticalScale(20),
+  },
+  roomName: {
+    color: Colors.white,
   },
   dialog: {
     padding: scale(20),

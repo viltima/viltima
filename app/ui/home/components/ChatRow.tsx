@@ -57,7 +57,6 @@ export const ChatRow: React.FC<IProps> = ({ user, isChannel, receiver }) => {
         <View style={styles.container}>
           <View style={styles.message}>
             <Text style={styles.text}>{user?.username}</Text>
-            {/* <Text style={styles.lastMessage}>{lastMessage || 'Say Hi!'}</Text> */}
           </View>
         </View>
         <View style={styles.divider} />
