@@ -9,8 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "fmt": "npx prettier --write .",
-    "prepare": "husky install"
+    "fmt": "npx prettier --write ."
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
