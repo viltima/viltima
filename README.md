@@ -6,6 +6,10 @@
 
 Communicate, everywhere.
 
+Viltima is a fully featured Chat-Application with built in Room service (create, edit and delete privat or public rooms), authentication and email verification. 
+
+We do not save any Chat or Room activites - so don't worry when sending risky messages to your crush, 😎
+
 ### Links
 
 - [Docs](https://viltima-docs.vercel.app)
